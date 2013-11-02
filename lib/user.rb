@@ -12,7 +12,16 @@ class User
     "#{self.name}"
   end
 
-  def can_roll_again?
-    @last_roll != 1
+  def can_roll_again?(max_score)
+    @last_roll != 1 && @score < max_score
+  end
+
+  def roll
+    rand(1..6)
+  end
+
+  def play
+    @last_roll = self.roll
+    @score += @last_roll
   end
 end
