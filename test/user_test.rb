@@ -62,14 +62,27 @@ class UserTest < Test::Unit::TestCase
   end
 
   def test_user_can_roll_again
-    (2..6).each do |n|
-      @user.expects(:roll).returns(n)
-      assert_equal true, @user.can_roll_again?
+    (2..4).each do |n| 
+      @user.last_roll = n 
+      assert_equal true, @user.can_roll_again?(100)
     end
   end
 
-  def test_user_cannot_roll_again
+  def test_user_can_roll_again_when_score
+    @user.score = 60
+    assert_equal true, @user.can_roll_again?(100)  
+  end
+
+  def test_user_cannot_roll_again_when_one
     @user.last_roll = 1
-    assert_equal false, @user.can_roll_again? 
+    assert_equal false, @user.can_roll_again?(10) 
+  end
+
+  def test_user_cannot_roll_again_when_max_score
+    @user.score = 100
+    assert_equal false, @user.can_roll_again?(100)
+
+    @user.score = 101
+    assert_equal false, @user.can_roll_again?(100)
   end
 end
