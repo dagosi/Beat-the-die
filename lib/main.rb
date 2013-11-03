@@ -1,3 +1,6 @@
+require_relative "table"
+require_relative "user"
+
 def print_welcome_message
   puts "*******************"
   puts "*Welcome to greed!*"
@@ -5,19 +8,14 @@ def print_welcome_message
 end
 
 def get_num_players
-  @table = Table.new
+  @table = Table.new(@max_score)
   puts "How many player are betting today?"
-  @num_players = gets.chomp  
-end
-
-def get_capital
-  puts "How much is the initial money?"
-  @capital = gets.chomp  
+  @num_players = gets.chomp.to_i
 end
 
 def get_max_score
   puts "What is the top score?"
-  @table.max_score = gets.chomp
+  @max_score = gets.chomp.to_i
 end
 
 def get_players
@@ -25,11 +23,12 @@ def get_players
 
   @num_players.times do
     user_name = gets.chomp
-    @table << User.new(capital, user_name)
+    @table.users << User.new(user_name)
   end  
 end
 
 print_welcome_message()
-get_capital()
+get_max_score()
 get_num_players()
 get_players()
+@table.start_game

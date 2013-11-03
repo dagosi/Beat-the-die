@@ -1,8 +1,7 @@
 class User
-  attr_accessor :capital, :name, :score, :last_roll
+  attr_accessor :name, :score, :last_roll
 
-  def initialize(capital, name)
-    @capital = capital
+  def initialize(name)
     @name = name
     @score = 0
     @last_roll = 0

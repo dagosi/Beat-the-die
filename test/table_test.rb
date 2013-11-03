@@ -4,10 +4,10 @@ require "user"
 
 class TableTest < Test::Unit::TestCase
   def setup
-    @table = Table.new
-    @user1 = User.new(100, "Daniel1")
-    @user2 = User.new(100, "Daniel2")
-    @user3 = User.new(100, "Daniel3")
+    @table = Table.new(100)
+    @user1 = User.new("Daniel1")
+    @user2 = User.new("Daniel2")
+    @user3 = User.new("Daniel3")
   end
 
   def test_create_table_with_no_users
@@ -27,7 +27,6 @@ class TableTest < Test::Unit::TestCase
 
   def test_game_over_when_max_score
     @table.add_users(@user1)
-    @table.max_score = 100
 
     final_score = @table.max_score
     @user1.stubs(:score).returns(final_score)
@@ -36,7 +35,6 @@ class TableTest < Test::Unit::TestCase
 
   def test_game_over_when_up_max_score
     @table.add_users(@user1)
-    @table.max_score = 100
 
     final_score = @table.max_score + 3
     @user1.stubs(:score).returns(final_score)
@@ -45,7 +43,6 @@ class TableTest < Test::Unit::TestCase
 
   def test_should_not_be_game_over
     @table.add_users(@user1)
-    @table.max_score = 100
 
     final_score = @table.max_score - 3
     @user1.stubs(:score).returns(final_score)
@@ -75,7 +72,7 @@ class TableTest < Test::Unit::TestCase
     @table.add_users(@user1, @user2, @user3)
     @table.max_score = 10
 
-    @user1.stubs(:roll).returns(5)
+    @user1.stubs(:roll).returns(2)
     @table.start_game
 
     assert_equal @user1, @table.winner

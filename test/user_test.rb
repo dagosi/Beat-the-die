@@ -6,7 +6,7 @@ class UserTest < Test::Unit::TestCase
   def setup
     @user_name = "Daniel"
     @capital = 1000
-    @user = User.new(@capital, @user_name)
+    @user = User.new(@user_name)
   end
 
   def test_rolled_dice_is_a_number
@@ -52,9 +52,8 @@ class UserTest < Test::Unit::TestCase
     assert_equal (2..5).inject(:+), @user.score
   end
 
-  def test_user_with_name_and_capital_after_creation
+  def test_user_with_name_after_creation
     assert_equal @user_name, @user.name
-    assert_equal @capital, @user.capital
   end
 
   def test_user_name_when_print_object
