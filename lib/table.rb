@@ -1,5 +1,5 @@
 class Table
-  attr_accessor :users, :turn_number, :max_score, :winner
+  attr_accessor :users, :turn_number, :max_score
 
   def initialize(max_score)
     @users = []
@@ -31,17 +31,19 @@ class Table
     while true
       while self.user_in_turn.can_roll_again?(@max_score)
         self.user_in_turn.play
-        puts "#{self.user_in_turn} rolled #{self.user_in_turn.last_roll}"
-        puts "Total #{self.user_in_turn.score}"
+        puts "#{self.user_in_turn} rolled #{self.user_in_turn.last_roll} Score: #{self.user_in_turn.score}"
+        sleep 1
       end
-
+      puts
+      
       if game_over?
         break
       else
+        self.user_in_turn.last_roll = 0
         self.change_turn()
       end
     end
 
-    @winner = self.user_in_turn()
+    puts "#{self.user_in_turn} is the winner!!!"
   end
 end

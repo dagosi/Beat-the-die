@@ -2,14 +2,14 @@ require_relative "table"
 require_relative "user"
 
 def print_welcome_message
-  puts "*******************"
-  puts "*Welcome to greed!*"
-  puts "*******************\n\n"  
+  puts "***********************"
+  puts "** Welcome to greed! **"
+  puts "***********************\n\n"  
 end
 
 def get_num_players
   @table = Table.new(@max_score)
-  puts "How many player are betting today?"
+  puts "How many players are playing?"
   @num_players = gets.chomp.to_i
 end
 
@@ -19,7 +19,7 @@ def get_max_score
 end
 
 def get_players
-  puts "Please enter the names of the players."
+  puts "Please enter the names of the players"
 
   @num_players.times do
     user_name = gets.chomp
